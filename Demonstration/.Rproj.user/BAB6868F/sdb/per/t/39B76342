@@ -1,0 +1,16 @@
+{
+    "contents" : "library(shiny)\n\nshinyUI(fluidPage(\n  # In application css\n  tags$style(HTML(\"h2{font-size:22px;margin-left:10px} div#Prob, div#N{font-size:20px;color:red;display:inline}\")),\n  # Application title\n  titlePanel(\"Relation between number of subjects and probability of successful randomization\"),\n  # Sidebar with a slider input for number of bins\n  fluidRow(\n    sidebarPanel(\n      sliderInput(\"rc_N\", \"Pseudo-isolation criterion\", .01, .50, .1, .01),\n      uiOutput(\"sliderInputN\"),\n      numericInput(\"L_N\", \"The number of experimental condition\", 2, 2, NA, 1),\n      HTML(\"<br>The probability of success randomization now is \"),\n      textOutput(\"Prob\")\n    ),\n    # Show a plot of the generated distribution\n    mainPanel(\n      plotOutput(\"PvsNPlot_N\"),\n      HTML(\"The border between blue and red line denotes the probability of successful randomization for a given sample size.\")\n    )\n  ),tags$hr(),\n  fluidRow(\n    sidebarPanel(\n      sliderInput(\"rc_P\", \"Pseudo-isolation criterion\", .01, .50, .1, .01),\n      uiOutput(\"sliderInputP\"),\n      numericInput(\"L_P\", \"The number of experimental condition\", 2, 2, NA, 1),\n      HTML(\"<br>The required sample size in each condition is \"),\n      textOutput(\"N\")\n    ),\n    # Show a plot of the generated distribution\n    mainPanel(\n      plotOutput(\"PvsNPlot_P\"),\n      HTML(\"The border between blue and red line denotes the required sample size for a given acceptable good-randomization rate (q).\")\n    )\n  )\n))\n",
+    "created" : 1415204996602.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2347707641",
+    "id" : "39B76342",
+    "lastKnownWriteTime" : 1417125784,
+    "path" : "~/work/shiny/equality/Demonstration/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
