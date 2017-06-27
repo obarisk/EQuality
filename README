@@ -1,0 +1,50 @@
+## About
+
+E*Quality is a tool to evaluate the quality of randomization (and thus the validity of causal inference) in experiments in terms of sample size. Given number of experimental conditions, pseudo-isolation criterion[1], and either one of (1) sample size, or (2) acceptable good-randomization rate[2], the user can calculate the rest (by E*Quality Calculator). Specifically, E*Quality allows users to calculate:
+
+    Required sample size for successful randomization, given researcher-defined acceptable good-randomization rate.
+    Probability of successful randomization, given sample size.
+
+To clarify the relationship between sample size and probability of successful randomization, E*Quality provides a tool to simulate randomly assign participants to the given experimental conditions many times and then shows the histogram of correlation between independent variable and nuisance variable (E*Quality Simulation).
+
+E*Quality can also be used to display the relationship among number of experimental conditions, sample size, criterion of successful randomization and probability of successful randomization (E*Quality Demonstration).
+[1] Pseudo-isolation criterion (rc) denotes the magnitude of confounding effects researchers are willing to tolerate, which is the upper bound of magnitude of confounding effect. It is defined by the correlation between independent variable and sum of nuisance variable effects rXϵ.
+[2] Acceptable good-randomization rate denotes that, given the pseudo-isolation criterion, the probability of successful randomization. Precisely, it is the probability of observing a rXϵ less than rc. 
+
+## Background of E*Quality
+
+Randomization is the major way experimenters used to clarify causal relationship in experiments. Proper randomization of participants to experimental conditions induce the expectation that the experimental effect will not be confounded by any nuisance variable. However, successful randomization requires an appropriate sample size. How many participants are needed for successful randomization, thus make randomization be valid for causal inference? How appropriate is it for experimenters to make causal inference by a limited amount of N? E*Quality aims to help experimenter to clarify these questions. 
+
+## The rationale of E*Quality 
+The purpose of randomization (either randomly assign participants to different situations, or assign situations of different time sequence to the same participant) is to make experimental conditions statistically independent of any nuisance variable, thus provides a foundation for causal inference. However, independence between experimental conditions and nuisance variable achieved by random assignment is probabilistic. The goal of randomization is to produce an ideal situation of rXϵ=0, however, even in a perfect procedure of randomization, only infinite sample size can assure rXϵ exactly equal to 0. Considering X and ϵ, for finite sample size N, to randomly assign participants to groups or conditions can be seen as a random sample form a population which correlation between X and ϵ is zero. Assuming X is categorical, ϵ follows a normal distribution, and ρXϵ equals to zero, given the number of experimental conditions is L, the probability of rXϵ less than a given criterion rc is:
+p(|rXϵ|<rc)=p(r2Xϵ<r2c)=p(r2XϵL−11−r2XϵN−L<r2cL−11−r2cN−L)=p(F(L−1,N−L)<r2cL−11−r2cN−L)(1)
+If we want the probability of randomization achieves criterion rc, i.e., probability of observing |rXϵ| less than rc is larger enough, say q(acceptable good-randomization rate defined by experimenters), the minimum sample size can be found by the following equation
+p(F(L−1,N−L)<r2cL−11−r2cN−L)>q(2)
+
+Table 1	N of either gender in
+each condition
+rc
+	Condition 1	Condition 2
+0 	50 	50
+.1 	45 	55
+.2 	40 	60
+.3 	35 	65
+.4 	30 	70
+.5 	25 	75
+E*Quality was made up of Equation (1) (2)
+
+rc : pseudo-isolation criterion, which is the magnitude of confounding effects experimenters are willing to tolerate. Suppose we are trying to randomly assign 100 males and females to either of two conditions, the meaning of magnitude of rc is equivalent to the gender distribution as in Table 1. 
+
+## Run Examples
+```r
+if( !require('pacman') ) {
+  install.packages('pacman')
+  library('pacman')
+}
+
+pacman::p_load('shiny', 'reshape', 'ggplot2', 'grid', 'magrittr')
+
+runGitHub('obarisk/EQuality', subdir='Simulation')
+runGitHub('obarisk/EQuality', subdir='Calculator')
+runGitHub('obarisk/EQuality', subdir='Demonstration')
+```
