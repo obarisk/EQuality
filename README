@@ -48,3 +48,6 @@ runGitHub('obarisk/EQuality', subdir='Simulation')
 runGitHub('obarisk/EQuality', subdir='Calculator')
 runGitHub('obarisk/EQuality', subdir='Demonstration')
 ```
+
+[DemoPage](http://140.116.183.186/EQuality/)
+
